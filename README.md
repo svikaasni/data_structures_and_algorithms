@@ -408,3 +408,112 @@ class Solution:
 **Language:** Python 3  
 **Platform:** LeetCode  
 **Repository:** DSA Practice
+
+---
+
+# LeetCode 1524 – Number of Sub-arrays With Odd Sum
+
+## Problem Description
+Given an integer array `arr`, return the number of subarrays whose sum is odd.
+
+Since the answer can be large, return it modulo `10^9 + 7`.
+
+**LeetCode:** [1524. Number of Sub-arrays With Odd Sum](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/)
+
+## Approach: Prefix Sum + Parity
+
+We use prefix sums to efficiently count subarrays with odd sums.
+
+### Key Observation
+A subarray sum is odd when the two prefix sums have different parity.
+
+- Odd prefix - Even prefix = Odd
+- Even prefix - Odd prefix = Odd
+- Odd prefix - Odd prefix = Even
+- Even prefix - Even prefix = Even
+
+### Variables Used
+- `odd`: Count of odd prefix sums.
+- `even`: Count of even prefix sums.
+- `prefix`: Running prefix sum.
+- `result`: Number of subarrays with odd sums.
+- `MOD`: Modulo value (`10^9 + 7`).
+
+Initially:
+- `odd = 0`
+- `even = 1` (empty prefix sum is zero).
+
+## Python Solution
+
+```python
+class Solution:
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        MOD = 10**9 + 7
+
+        odd = 0
+        even = 1
+        prefix = 0
+        result = 0
+
+        for num in arr:
+            prefix += num
+
+            if prefix % 2 == 0:
+                result += odd
+                even += 1
+            else:
+                result += even
+                odd += 1
+
+        return result % MOD
+```
+
+## Example
+
+**Input:**
+```python
+arr = [1, 3, 5]
+```
+
+**Output:**
+```python
+4
+```
+
+**Explanation:**
+
+The subarrays with odd sums are:
+- `[1]` → Sum = 1
+- `[3]` → Sum = 3
+- `[5]` → Sum = 5
+- `[1, 3, 5]` → Sum = 9
+
+Total = 4.
+
+## Complexity Analysis
+
+| Complexity | Value | Explanation |
+|---|---|---|
+| Time | O(n) | Single traversal of the array |
+| Space | O(1) | Uses constant extra variables |
+
+## Concepts Learned
+- Prefix Sum
+- Odd and Even Parity
+- Subarray Counting
+- Mathematical Observation
+- Space Optimization
+
+## Test Cases
+
+| Input | Output |
+|---|---:|
+| `[1, 3, 5]` | 4 |
+| `[2, 4, 6]` | 0 |
+| `[1, 2, 3]` | 4 |
+| `[1]` | 1 |
+
+## Key Takeaway
+
+Instead of generating every possible subarray and calculating its sum, prefix sum parity allows us to count odd-sum subarrays in **O(n) time and O(1) space**.
+
