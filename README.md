@@ -517,3 +517,5 @@ Total = 4.
 
 Instead of generating every possible subarray and calculating its sum, prefix sum parity allows us to count odd-sum subarrays in **O(n) time and O(1) space**.
 
+---
+
