@@ -519,3 +519,130 @@ Instead of generating every possible subarray and calculating its sum, prefix su
 
 ---
 
+
+# LeetCode Problem Solutions – Python 3
+
+This repository contains Python solutions for LeetCode problems, focusing on problem-solving, algorithms, and data structures.
+
+## Problems Solved
+
+| No. | Problem Name | Difficulty | Concepts |
+|---|---|---|---|
+| 40 | Combination Sum II | Medium | Backtracking, Recursion, Sorting |
+| 41 | First Missing Positive | Hard | Cyclic Sort, Array Manipulation |
+| 2243 | Calculate Digit Sum of a String | Easy | Strings, Loops, Mathematics |
+
+---
+
+## 1. LeetCode 40 – Combination Sum II
+
+**Problem:** Find all unique combinations of candidates that sum up to a given target. Each number can be used only once.
+
+**Example:**
+
+Input:
+```python
+candidates = [10,1,2,7,6,1,5]
+target = 8
+```
+
+Output:
+```python
+[[1,1,6], [1,2,5], [1,7], [2,6]]
+```
+
+**Approach:**
+- Sort the input array.
+- Use backtracking to explore possible combinations.
+- Skip duplicate elements to avoid duplicate combinations.
+- Use `i + 1` to ensure each element is used only once.
+- Stop exploring when the sum exceeds the target.
+
+**Key Concepts:** Backtracking, Recursion, Sorting, Duplicate Handling.
+
+---
+
+## 2. LeetCode 41 – First Missing Positive
+
+**Problem:** Find the smallest missing positive integer from an unsorted integer array in O(n) time and O(1) extra space.
+
+**Example:**
+
+Input:
+```python
+nums = [3, 4, -1, 1]
+```
+
+Output:
+```python
+2
+```
+
+**Approach:**
+- Use the Cyclic Sort technique.
+- Place each positive number at its correct index.
+- Ignore negative numbers, zero, and numbers greater than the array length.
+- Find the first index where the value does not match `index + 1`.
+- Return `n + 1` if all positions are correct.
+
+**Key Concepts:** Cyclic Sort, Array Manipulation, In-place Swapping, Index Mapping.
+
+---
+
+## 3. LeetCode 2243 – Calculate Digit Sum of a String
+
+**Problem:** Repeatedly divide a numeric string into groups of size `k`, calculate the digit sum of each group, and concatenate the sums until the string length is less than or equal to `k`.
+
+**Example:**
+
+Input:
+```python
+s = "11111222223"
+k = 3
+```
+
+Output:
+```python
+"135"
+```
+
+**Approach:**
+- Divide the string into groups of size `k`.
+- Calculate the sum of digits in each group.
+- Convert each sum into a string.
+- Concatenate the group sums.
+- Repeat until the string length is less than or equal to `k`.
+
+**Key Concepts:** String Manipulation, Loops, Slicing, Mathematics.
+
+---
+
+## Technologies Used
+
+- **Language:** Python 3
+- **Platform:** LeetCode
+- **Topics:** Arrays, Strings, Backtracking, Recursion, Sorting, Cyclic Sort.
+
+## Learning Outcomes
+
+- Improved problem-solving and logical thinking.
+- Practiced recursion and backtracking.
+- Learned efficient array manipulation techniques.
+- Understood string slicing and digit operations.
+- Practiced time and space complexity analysis.
+
+## Repository Structure
+
+```text
+LeetCode/
+│
+├── 40_Combination_Sum_II.py
+├── 41_First_Missing_Positive.py
+├── 2243_Calculate_Digit_Sum.py
+└── README.md
+```
+
+## Goal
+
+Consistently practice LeetCode problems to strengthen Data Structures and Algorithms (DSA) skills and prepare for technical interviews and coding assessments.
+
