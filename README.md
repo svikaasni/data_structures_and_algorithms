@@ -646,3 +646,215 @@ LeetCode/
 
 Consistently practice LeetCode problems to strengthen Data Structures and Algorithms (DSA) skills and prepare for technical interviews and coding assessments.
 
+---
+
+# LeetCode Practice – Problems 2911 & 42
+
+This repository contains Python solutions for two LeetCode problems, focusing on Dynamic Programming, Two Pointers, and Array Optimization.
+
+---
+
+# 1. LeetCode 2911 – Minimum Changes to Make K Semi-palindromes
+
+**Difficulty:** Hard  
+**Topics:** Dynamic Programming, Strings, Divisors, Precomputation
+
+## Problem Description
+
+Given a string `s` and an integer `k`, divide the string into exactly `k` non-empty contiguous substrings.
+
+Each substring must be a semi-palindrome. Return the minimum number of character changes required to make all substrings semi-palindromes.
+
+## Python Solution
+
+```python
+class Solution:
+    def minimumChanges(self, s: str, k: int) -> int:
+        n = len(s)
+        INF = float('inf')
+
+        cost = [[INF] * n for _ in range(n)]
+
+        # Calculate minimum changes for every substring
+        for i in range(n):
+            for j in range(i + 1, n):
+                length = j - i + 1
+
+                for d in range(1, length):
+                    if length % d != 0:
+                        continue
+
+                    changes = 0
+                    groups = length // d
+
+                    for r in range(d):
+                        left = i + r
+                        right = i + r + (groups - 1) * d
+
+                        while left < right:
+                            if s[left] != s[right]:
+                                changes += 1
+
+                            left += d
+                            right -= d
+
+                    cost[i][j] = min(cost[i][j], changes)
+
+        # Dynamic Programming
+        dp = [[INF] * (k + 1) for _ in range(n + 1)]
+        dp[0][0] = 0
+
+        for i in range(2, n + 1):
+            for p in range(1, k + 1):
+                for j in range(i - 1):
+                    if dp[j][p - 1] != INF:
+                        dp[i][p] = min(
+                            dp[i][p],
+                            dp[j][p - 1] + cost[j][i - 1]
+                        )
+
+        return dp[n][k]
+```
+
+## Approach
+
+1. Calculate the minimum changes required to convert each substring into a semi-palindrome.
+2. Find all valid divisors of the substring length.
+3. Divide the substring into groups based on the divisor.
+4. Compare characters from both ends of each group.
+5. Use Dynamic Programming to divide the string into exactly `k` valid substrings with minimum changes.
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n⁴ + kn²) for this implementation.
+- **Space Complexity:** O(n² + nk).
+
+## Key Concepts
+
+- Dynamic Programming
+- String Manipulation
+- Divisors and Modulo
+- Palindrome Checking
+- Substring Partitioning
+
+---
+
+# 2. LeetCode 42 – Trapping Rain Water
+
+**Difficulty:** Hard  
+**Topics:** Arrays, Two Pointers, Greedy Algorithm
+
+## Problem Description
+
+Given an array `height` representing an elevation map where each bar has a width of 1, calculate how much water can be trapped between the bars after raining.
+
+## Example 1
+
+**Input:**
+```python
+height = [0,1,0,2,1,0,1,3,2,1,2,1]
+```
+
+**Output:**
+```python
+6
+```
+
+## Example 2
+
+**Input:**
+```python
+height = [4,2,0,3,2,5]
+```
+
+**Output:**
+```python
+9
+```
+
+## Python Solution – Two Pointers
+
+```python
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) - 1
+
+        left_max = 0
+        right_max = 0
+
+        water = 0
+
+        while left < right:
+
+            if height[left] < height[right]:
+
+                if height[left] >= left_max:
+                    left_max = height[left]
+                else:
+                    water += left_max - height[left]
+
+                left += 1
+
+            else:
+
+                if height[right] >= right_max:
+                    right_max = height[right]
+                else:
+                    water += right_max - height[right]
+
+                right -= 1
+
+        return water
+```
+
+## Approach
+
+1. Initialize two pointers at the beginning and end of the array.
+2. Maintain the maximum height encountered from both sides.
+3. Process the side with the smaller current boundary.
+4. Calculate trapped water using the difference between the maximum boundary and current height.
+5. Continue until both pointers meet.
+
+## Water Calculation Formula
+
+`Water = min(left_max, right_max) - height[i]`
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+## Key Concepts
+
+- Two Pointer Technique
+- Greedy Algorithm
+- Array Traversal
+- Prefix Maximum
+- Suffix Maximum
+- Space Optimization
+
+---
+
+# Overall Learning Outcomes
+
+| Problem | Main Technique | Time Complexity | Space Complexity |
+|---|---|---|---|
+| LeetCode 2911 | Dynamic Programming | O(n⁴ + kn²) | O(n² + nk) |
+| LeetCode 42 | Two Pointers | O(n) | O(1) |
+
+## Skills Practiced
+
+- Python Programming
+- Problem Solving
+- Dynamic Programming
+- String Manipulation
+- Array Optimization
+- Algorithm Complexity Analysis
+
+**Goal:** Improve problem-solving skills and develop optimized solutions for technical interviews and coding assessments.
+
+---
+
+*Language: Python 3 | Platform: LeetCode*
+
