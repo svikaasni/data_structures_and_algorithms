@@ -858,3 +858,68 @@ class Solution:
 
 *Language: Python 3 | Platform: LeetCode*
 
+
+---
+
+
+# LeetCode 2914 – Minimum Number of Changes to Make Binary String Beautiful
+
+## Problem
+Given a binary string `s` of even length, find the minimum number of character changes required to make the string beautiful.
+
+A string is beautiful if every pair of adjacent characters is equal (`00` or `11`).
+
+## Approach – Greedy
+
+1. Initialize a counter `count = 0`.
+2. Traverse the string in steps of 2.
+3. Compare each pair of adjacent characters.
+4. If the characters are different, increment the counter.
+5. Return the total count.
+
+## Python Solution
+
+```python
+class Solution:
+    def minChanges(self, s: str) -> int:
+        count = 0
+
+        for i in range(0, len(s), 2):
+            if s[i] != s[i + 1]:
+                count += 1
+
+        return count
+```
+
+## Example
+
+**Input:**
+```python
+s = "1001"
+```
+
+**Output:**
+```python
+2
+```
+
+**Explanation:**
+
+- Pair `"10"` requires one change.
+- Pair `"01"` requires one change.
+- Total minimum changes = 2.
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n) – Each pair is checked once.
+- **Space Complexity:** O(1) – Only a counter is used.
+
+## Key Concepts
+- Greedy Algorithm
+- String Traversal
+- Pair Comparison
+
+## LeetCode Link
+https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/
+
+**Status:** Solved ✅
