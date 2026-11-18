@@ -1008,3 +1008,111 @@ nums = [2, 3, 0, 1, 4]
 https://leetcode.com/problems/jump-game-ii/
 
 **Status:** Solved ✅
+
+---
+
+# LeetCode 46 – Permutations
+
+## Problem Statement
+Given an array `nums` containing distinct integers, return all possible permutations in any order.
+
+A permutation is a rearrangement of all elements in a particular sequence.
+
+## Approach – Backtracking
+
+Backtracking is used to generate all possible arrangements by exploring different choices.
+
+### Algorithm
+1. Initialize an empty result list.
+2. Create a recursive function `backtrack()`.
+3. Select an element from the remaining elements.
+4. Add the selected element to the current path.
+5. Recursively explore the remaining elements.
+6. Use `pop()` to undo the selection.
+7. When no elements remain, add the current permutation to the result.
+8. Return all permutations.
+
+## Python Solution
+
+```python
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+
+        def backtrack(path, remaining):
+            if not remaining:
+                result.append(path[:])
+                return
+
+            for i in range(len(remaining)):
+                path.append(remaining[i])
+
+                backtrack(
+                    path,
+                    remaining[:i] + remaining[i+1:]
+                )
+
+                path.pop()
+
+        backtrack([], nums)
+
+        return result
+```
+
+## Example 1
+
+**Input:**
+```python
+nums = [1, 2, 3]
+```
+
+**Output:**
+```python
+[
+    [1, 2, 3],
+    [1, 3, 2],
+    [2, 1, 3],
+    [2, 3, 1],
+    [3, 1, 2],
+    [3, 2, 1]
+]
+```
+
+**Explanation:**
+
+There are 6 possible permutations of the three elements.
+
+## Example 2
+
+**Input:**
+```python
+nums = [0, 1]
+```
+
+**Output:**
+```python
+[[0, 1], [1, 0]]
+```
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n × n!) – Generates n! permutations, each containing n elements.
+- **Space Complexity:** O(n × n!) – Stores all permutations. Auxiliary recursion space is O(n).
+
+## Key Concepts
+- Backtracking
+- Recursion
+- Array Manipulation
+- List Slicing
+- Depth-First Search (DFS)
+
+## Important Python Functions
+
+| Function | Purpose |
+|---|---|
+| `append()` | Adds an element to the current path |
+| `pop()` | Removes the last selected element |
+| `path[:]` | Creates a copy of the current permutation |
+| `backtrack()` | Explores possible arrangements |
+
+## Leet
