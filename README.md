@@ -923,3 +923,88 @@ s = "1001"
 https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/
 
 **Status:** Solved ✅
+
+---
+
+# LeetCode 45 – Jump Game II
+
+## Problem
+Given an integer array `nums`, where each element represents the maximum number of steps you can jump forward, find the minimum number of jumps required to reach the last index.
+
+## Approach – Greedy Algorithm
+
+1. Initialize three variables:
+   - `jumps = 0`
+   - `current_end = 0`
+   - `farthest = 0`
+2. Traverse the array until the second-last index.
+3. Update the farthest reachable position using `i + nums[i]`.
+4. Whenever the current index reaches `current_end`, increment the jump count.
+5. Update `current_end` to `farthest`.
+6. Return the minimum number of jumps.
+
+## Python Solution
+
+```python
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        jumps = 0
+        current_end = 0
+        farthest = 0
+
+        for i in range(len(nums) - 1):
+            farthest = max(farthest, i + nums[i])
+
+            if i == current_end:
+                jumps += 1
+                current_end = farthest
+
+        return jumps
+```
+
+## Example 1
+
+**Input:**
+```python
+nums = [2, 3, 1, 1, 4]
+```
+
+**Output:**
+```python
+2
+```
+
+**Explanation:**
+
+- Start at index 0.
+- Jump from index 0 to index 1.
+- Jump from index 1 to index 4.
+- Minimum jumps required = 2.
+
+## Example 2
+
+**Input:**
+```python
+nums = [2, 3, 0, 1, 4]
+```
+
+**Output:**
+```python
+2
+```
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n) – The array is traversed once.
+- **Space Complexity:** O(1) – Only three variables are used.
+
+## Key Concepts
+- Greedy Algorithm
+- Array Traversal
+- Range Tracking
+- Optimization
+
+## LeetCode Link
+https://leetcode.com/problems/jump-game-ii/
+
+**Status:** Solved ✅
