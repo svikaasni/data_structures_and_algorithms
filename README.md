@@ -1319,3 +1319,106 @@ Backtracking explores all possible arrangements, while sorting and duplicate-ski
 **Difficulty:** Medium
 
 **Language:** Python 3
+
+---
+
+# LeetCode 48 – Rotate Image
+
+## Problem Description
+Given an `n x n` 2D matrix representing an image, rotate the image by 90 degrees clockwise.
+
+The rotation must be performed in-place without creating another matrix.
+
+## Approach: Transpose + Reverse
+
+The matrix can be rotated efficiently using two steps:
+
+1. **Transpose the Matrix**
+   - Convert rows into columns.
+   - Swap `matrix[i][j]` with `matrix[j][i]`.
+   - Traverse only the upper triangular portion to avoid swapping elements twice.
+
+2. **Reverse Each Row**
+   - Reverse every row of the transposed matrix.
+   - This produces the required 90-degree clockwise rotation.
+
+## Python Solution
+
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+
+        # Step 1: Transpose the matrix
+        for i in range(n):
+            for j in range(i + 1, n):
+                matrix[i][j], matrix[j][i] = (
+                    matrix[j][i], matrix[i][j]
+                )
+
+        # Step 2: Reverse each row
+        for row in matrix:
+            row.reverse()
+```
+
+## Example
+
+**Input:**
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+```
+
+**Output:**
+```python
+[
+    [7, 4, 1],
+    [8, 5, 2],
+    [9, 6, 3]
+]
+```
+
+**Explanation:**
+
+First, transpose the matrix:
+
+```python
+[
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9]
+]
+```
+
+Then reverse each row to obtain the final rotated matrix.
+
+## Complexity Analysis
+
+| Complexity | Value | Explanation |
+|---|---|---|
+| Time | O(n²) | Matrix transposition and row reversal |
+| Auxiliary Space | O(1) | In-place modification |
+
+## Key Concepts
+- 2D Arrays
+- Matrix Traversal
+- Matrix Transposition
+- In-place Swapping
+- Row Reversal
+
+## Key Takeaway
+A 90-degree clockwise matrix rotation can be performed efficiently using the **Transpose + Reverse** technique without allocating an additional matrix.
+
+## Related Problems
+- [LeetCode 54 – Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+- [LeetCode 73 – Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
+- [LeetCode 1886 – Determine Whether Matrix Can Be Obtained By Rotation](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/)
+
+**LeetCode Problem:** [48 – Rotate Image](https://leetcode.com/problems/rotate-image/)
+
+**Difficulty:** Medium
+
+**Language:** Python 3
