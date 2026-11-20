@@ -1198,3 +1198,124 @@ This problem demonstrates how sorting combined with dynamic programming can effi
 **Difficulty:** Hard
 
 **Language:** Python 3
+
+---
+
+# LeetCode 47 – Permutations II
+
+## Problem Description
+Given an integer array `nums` that may contain duplicate elements, return all possible unique permutations.
+
+The solution must not contain duplicate permutations.
+
+## Approach: Backtracking + Sorting
+
+1. Sort the input array to place duplicate elements next to each other.
+2. Create a `used` array to track which elements have already been selected.
+3. Use backtracking to generate permutations.
+4. Skip duplicate elements using the condition:
+   ```python
+   if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+       continue
+   ```
+5. Once the permutation reaches the original array length, add a copy of it to the result.
+6. Backtrack by removing the last element and marking it as unused.
+
+## Python Solution
+
+```python
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+        used = [False] * len(nums)
+
+        def backtrack(path):
+            if len(path) == len(nums):
+                res.append(path[:])
+                return
+
+            for i in range(len(nums)):
+                if used[i]:
+                    continue
+
+                if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+                    continue
+
+                used[i] = True
+                path.append(nums[i])
+
+                backtrack(path)
+
+                path.pop()
+                used[i] = False
+
+        backtrack([])
+        return res
+```
+
+## Example 1
+
+**Input:**
+```python
+nums = [1, 1, 2]
+```
+
+**Output:**
+```python
+[[1, 1, 2], [1, 2, 1], [2, 1, 1]]
+```
+
+**Explanation:**
+
+The array contains duplicate values, but the algorithm generates only unique permutations.
+
+## Example 2
+
+**Input:**
+```python
+nums = [1, 2, 3]
+```
+
+**Output:**
+```python
+[
+    [1, 2, 3],
+    [1, 3, 2],
+    [2, 1, 3],
+    [2, 3, 1],
+    [3, 1, 2],
+    [3, 2, 1]
+]
+```
+
+## Complexity Analysis
+
+Let:
+- `n` = Number of elements.
+- `k` = Number of unique permutations.
+
+| Complexity | Value |
+|---|---|
+| Time | O(n × n!) |
+| Auxiliary Space | O(n) |
+| Output Space | O(k × n) |
+
+## Key Concepts
+- Backtracking
+- Recursion
+- Sorting
+- Duplicate Handling
+- Boolean Visited Array
+
+## Key Takeaway
+Backtracking explores all possible arrangements, while sorting and duplicate-skipping conditions ensure that each unique permutation is generated only once.
+
+## Related Problem
+- [LeetCode 46 – Permutations](https://leetcode.com/problems/permutations/)
+
+**LeetCode Problem:** [47 – Permutations II](https://leetcode.com/problems/permutations-ii/)
+
+**Difficulty:** Medium
+
+**Language:** Python 3
