@@ -1116,3 +1116,85 @@ nums = [0, 1]
 | `backtrack()` | Explores possible arrangements |
 
 ## Leet
+
+---
+
+# LeetCode 3041 – Maximize Consecutive Elements in an Array After Modification
+
+## Problem Description
+Given a 0-indexed array `nums`, you can increase the value of any element by at most one. You need to select a subsequence of the modified array such that the selected elements form a consecutive sequence of integers.
+
+Return the maximum possible length of such a subsequence.
+
+## Approach: Sorting + Dynamic Programming
+
+1. Sort the array to process elements in increasing order.
+2. Maintain a DP dictionary to store the maximum length of a consecutive subsequence ending at a particular value.
+3. For each element `num`:
+   - Update `dp[num + 1]` using the best sequence ending at `num`.
+   - Update `dp[num]` using the best sequence ending at `num - 1`.
+4. Maintain the maximum length throughout the traversal.
+
+## Python Solution
+
+```python
+class Solution:
+    def maxSelectedElements(self, nums: List[int]) -> int:
+        nums.sort()
+        dp = {}
+        ans = 0
+
+        for num in nums:
+            dp[num + 1] = max(dp.get(num + 1, 0),
+                              dp.get(num, 0) + 1)
+
+            dp[num] = max(dp.get(num, 0),
+                          dp.get(num - 1, 0) + 1)
+
+            ans = max(ans, dp[num], dp[num + 1])
+
+        return ans
+```
+
+## Example
+
+**Input:**
+```python
+nums = [2, 1, 5, 1, 1]
+```
+
+**Output:**
+```python
+4
+```
+
+**Explanation:**
+
+After modification, we can select the consecutive sequence:
+
+`[1, 2, 3, 4]`
+
+Therefore, the maximum possible length is `4`.
+
+## Complexity Analysis
+
+| Complexity | Value | Explanation |
+|---|---|---|
+| Time | O(n log n) | Sorting + DP traversal |
+| Space | O(n) | DP dictionary |
+
+## Key Concepts
+- Array Manipulation
+- Sorting
+- Greedy Optimization
+- Dynamic Programming
+- Hash Maps
+
+## Key Takeaway
+This problem demonstrates how sorting combined with dynamic programming can efficiently find the longest consecutive subsequence when each element can be increased by at most one.
+
+**LeetCode Problem:** [3041 – Maximize Consecutive Elements in an Array After Modification](https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/)
+
+**Difficulty:** Hard
+
+**Language:** Python 3
