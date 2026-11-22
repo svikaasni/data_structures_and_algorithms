@@ -1422,3 +1422,72 @@ A 90-degree clockwise matrix rotation can be performed efficiently using the **T
 **Difficulty:** Medium
 
 **Language:** Python 3
+
+---
+
+# LeetCode 2124 – Check if All A's Appears Before All B's
+
+## Problem Statement
+Given a string `s` consisting only of characters `'a'` and `'b'`, determine whether every occurrence of `'a'` appears before every occurrence of `'b'`.
+
+Return `True` if the condition is satisfied; otherwise, return `False`.
+
+## Approach: String Traversal
+
+The solution checks whether the substring `"ba"` exists in the given string.
+
+- If `"ba"` exists, an `'a'` appears after a `'b'`, violating the condition.
+- If `"ba"` does not exist, all `'a'` characters appear before all `'b'` characters.
+
+## Python Solution
+
+```python
+class Solution:
+    def checkString(self, s: str) -> bool:
+        return "ba" not in s
+```
+
+## Example
+
+**Input:**
+```python
+s = "aaabbb"
+```
+
+**Output:**
+```python
+True
+```
+
+**Explanation:**
+All occurrences of `'a'` appear before `'b'`.
+
+**Input:**
+```python
+s = "abab"
+```
+
+**Output:**
+```python
+False
+```
+
+**Explanation:**
+An `'a'` appears after a `'b'`, so the condition is violated.
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n) – The string is traversed to check for the substring `"ba"`.
+- **Space Complexity:** O(1) – No additional data structures are used.
+
+## Key Concepts
+- String Manipulation
+- Substring Checking
+- Logical Conditions
+- Time and Space Complexity
+
+## LeetCode Details
+- **Problem Number:** 2124
+- **Difficulty:** Easy
+- **Language:** Python
+- **Topic:** String
